@@ -2,23 +2,27 @@ package edu.berkeley.aep;
 
 public enum Unit {
 
-    INCHES(1, UnitType.LENGTH, "Inches"),
-    FEET(12, UnitType.LENGTH, "Feet"),
-    YARD(36, UnitType.LENGTH, "Yard"),
-    MILE(1760 * 36, UnitType.LENGTH, "Mile"),
-    TSP(1, UnitType.VOLUME, "Tsp"),
-    TBSP(3, UnitType.VOLUME, "Tbsp"),
-    OZ(6, UnitType.VOLUME, "Tsp"),
-    CUP(48, UnitType.VOLUME, "Tsp");
+    INCHES(1, 0, UnitType.LENGTH, "Inches"),
+    FEET(12, 0, UnitType.LENGTH, "Feet"),
+    YARD(36, 0, UnitType.LENGTH, "Yard"),
+    MILE(1760 * 36, 0, UnitType.LENGTH, "Mile"),
+    TSP(1, 0, UnitType.VOLUME, "Tsp"),
+    TBSP(3, 0, UnitType.VOLUME, "Tbsp"),
+    OZ(6, 0, UnitType.VOLUME, "Tsp"),
+    CUP(48, 0, UnitType.VOLUME, "Tsp"),
+    CELSIUS(9, 0, UnitType.TEMPERATURE, "C"),
+    FAHRENHEIT(5, -32, UnitType.TEMPERATURE, "F");
 
-    private enum UnitType { LENGTH, VOLUME; }
+    private enum UnitType { LENGTH, VOLUME, TEMPERATURE; }
 
     private final int inBaseUnits;
+    private final int offset;
     private final UnitType type;
     private final String name;
 
-    Unit(int inBaseUnits, UnitType type, String name) {
+    Unit(int inBaseUnits, int offset, UnitType type, String name) {
         this.inBaseUnits = inBaseUnits;
+        this.offset = offset;
         this.type = type;
         this.name = name;
     }
@@ -26,7 +30,7 @@ public enum Unit {
     int convertTo(Unit unit, int size) throws Exception {
         if (unit.type != type)
             throw new Exception("Cannot compare " + type + " to " + unit.type);
-        return size * inBaseUnits / unit.inBaseUnits;
+        return (size + offset) * inBaseUnits / unit.inBaseUnits - unit.offset;
     }
 
     @Override
