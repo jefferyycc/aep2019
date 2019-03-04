@@ -18,6 +18,24 @@ public class Quantity {
     }
 
     public boolean equals(Quantity other) {
-        return unit.inBaseUnits(size) == other.unit.inBaseUnits(other.size);
+        return this.size == other.convertTo(unit);
+    }
+
+    private int convertTo(Unit toUnits) {
+        try {
+            return unit.convertTo(toUnits, size);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public String toString() {
+        return size + " " + unit;
+    }
+
+    @Override
+    public int hashCode() {
+        return Integer.hashCode(size);
     }
 }
