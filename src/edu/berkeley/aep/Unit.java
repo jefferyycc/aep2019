@@ -1,5 +1,6 @@
 package edu.berkeley.aep;
 
+// Understands how to convert between units
 public enum Unit {
 
     INCHES(1, 0, UnitType.LENGTH, "Inches"),
@@ -27,9 +28,9 @@ public enum Unit {
         this.name = name;
     }
 
-    int convertTo(Unit unit, int size) throws Exception {
+    int convertTo(Unit unit, int size) {
         if (unit.type != type)
-            throw new Exception("Cannot compare " + type + " to " + unit.type);
+            throw new IllegalArgumentException("Cannot compare " + type + " to " + unit.type);
         return (size + offset) * inBaseUnits / unit.inBaseUnits - unit.offset;
     }
 

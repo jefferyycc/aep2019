@@ -22,11 +22,7 @@ public class Quantity {
     }
 
     private int convertTo(Unit toUnits) {
-        try {
-            return unit.convertTo(toUnits, size);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        return unit.convertTo(toUnits, size);
     }
 
     @Override
