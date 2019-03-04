@@ -54,4 +54,17 @@ public class QuantityTest {
         var threeFeet = new Quantity(3, Unit.FEET);
         assertEquals(oneTbsp, threeFeet);
     }
+
+    @Test
+    public void twoInchesPlusTwoInchesShouldEqualFourInches() {
+        var twoInches = new Quantity(2, Unit.INCHES);
+        assertEquals(new Quantity(4, Unit.INCHES), twoInches.add(twoInches));
+    }
+
+    @Test
+    public void twoTablespoonsPlusOneOzShouldEqualTwelveTeaspoons() {
+        var twoTbsp = new Quantity(2, Unit.TBSP);
+        var oneOz = new Quantity(1, Unit.OZ);
+        assertEquals(new Quantity(12, Unit.TSP), twoTbsp.add(oneOz));
+    }
 }

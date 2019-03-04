@@ -38,4 +38,8 @@ public class Quantity {
     public int hashCode() {
         return Integer.hashCode(size);
     }
+
+    public Quantity add(Quantity other) {
+        return new Quantity(size + other.convertTo(unit), unit);
+    }
 }
