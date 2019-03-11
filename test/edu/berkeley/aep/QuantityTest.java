@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class QuantityTest {
 
@@ -81,5 +82,19 @@ public class QuantityTest {
         var thirtyTwoFahrenheit = new ScaledQuantity(32, Unit.FAHRENHEIT);
         var zeroCelsius = new ScaledQuantity(0, Unit.CELSIUS);
         assertEquals(thirtyTwoFahrenheit, zeroCelsius);
+    }
+
+    @Test
+    public void tenCelsiusShouldBeBetterThanOneCelsius() {
+        var tenCelsius = new ScaledQuantity(10, Unit.CELSIUS);
+        var zeroCelsius = new ScaledQuantity(0, Unit.CELSIUS);
+        assertTrue(tenCelsius.betterThan(zeroCelsius));
+    }
+
+    @Test
+    public void oneInchShouldNotBeBetterThanTwoFeet() {
+        var twoFeet = new ArithmeticQuantity(2, Unit.FEET);
+        var oneInch = new ArithmeticQuantity(1, Unit.INCHES);
+        assertFalse(oneInch.betterThan(twoFeet));
     }
 }

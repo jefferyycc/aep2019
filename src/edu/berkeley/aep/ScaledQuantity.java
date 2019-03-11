@@ -34,4 +34,8 @@ public class ScaledQuantity {
     public int hashCode() {
         return Integer.hashCode(size);
     }
+
+    public boolean betterThan(ScaledQuantity other) {
+        return size > other.convertTo(unit);
+    }
 }
