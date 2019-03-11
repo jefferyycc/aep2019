@@ -2,6 +2,7 @@ package edu.berkeley.aep;
 
 import org.junit.Test;
 
+import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 
 public class QuantityTest {
@@ -81,5 +82,4 @@ public class QuantityTest {
         var zeroCelsius = new ScaledQuantity(0, Unit.CELSIUS);
         assertEquals(thirtyTwoFahrenheit, zeroCelsius);
     }
-
 }

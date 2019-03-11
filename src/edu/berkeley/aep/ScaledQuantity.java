@@ -13,11 +13,11 @@ public class ScaledQuantity {
     @Override
     public boolean equals(Object other) {
         if (this == other) return true;
-        if (!(other instanceof ArithmeticQuantity)) return false;
-        return equals((ArithmeticQuantity) other);
+        if (!(other instanceof ScaledQuantity)) return false;
+        return equals((ScaledQuantity) other);
     }
 
-    public boolean equals(ArithmeticQuantity other) {
+    public boolean equals(ScaledQuantity other) {
         return this.size == other.convertTo(unit);
     }
 
