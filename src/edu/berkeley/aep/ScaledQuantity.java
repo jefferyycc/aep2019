@@ -1,7 +1,7 @@
 package edu.berkeley.aep;
 
 // Understands an amount in an interval scale in a given unit
-public class ScaledQuantity {
+public class ScaledQuantity implements Bestable<ScaledQuantity> {
     protected final int size;
     protected final Unit unit;
 
@@ -35,7 +35,8 @@ public class ScaledQuantity {
         return Integer.hashCode(size);
     }
 
+    @Override
     public boolean betterThan(ScaledQuantity other) {
-        return size > other.convertTo(unit);
+        return size > ((ScaledQuantity) other).convertTo(unit);
     }
 }

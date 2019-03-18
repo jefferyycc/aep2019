@@ -1,7 +1,7 @@
 package edu.berkeley.aep;
 
 // Understands the probability of an outcome occurring
-public class Chance {
+public class Chance implements Bestable<Chance> {
     private final double probability;
 
     public Chance(double probability) {
@@ -36,5 +36,10 @@ public class Chance {
     public Chance or(Chance other) {
         // De Morgan's Law
         return this.not().and(other.not()).not();
+    }
+
+    @Override
+    public boolean betterThan(Chance other) {
+        return this.probability > other.probability;
     }
 }

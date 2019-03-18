@@ -3,15 +3,15 @@ package edu.berkeley.aep;
 // Understands how to compare quantities to find the best
 public class Bester {
 
-    private final ScaledQuantity[] quantities;
+    private final Bestable[] quantities;
 
-    public Bester(ScaledQuantity... quantities) {
+    public Bester(Bestable... quantities) {
         this.quantities = quantities;
     }
 
-    public ScaledQuantity best() {
+    public Bestable best() {
         var champion = quantities[0];
-        for (ScaledQuantity quantity : quantities) {
+        for (Bestable quantity : quantities) {
             if (quantity.betterThan(champion)) {
                 champion = quantity;
             }

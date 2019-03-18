@@ -13,4 +13,14 @@ public class BesterTest {
         var bester = new Bester(oneYard, twoInches, twoFeet);
         assertEquals(oneYard, bester.best());
     }
+
+    @Test
+    public void oneShouldBeBestProbability() {
+        var probabilityOne = new Chance(1);
+        var probabilityHalf = new Chance(0.5);
+        var probabilityQuarter = new Chance(0.25);
+
+        var bester = new Bester(probabilityOne, probabilityHalf, probabilityQuarter);
+        assertEquals(probabilityOne, bester.best());
+    }
 }
