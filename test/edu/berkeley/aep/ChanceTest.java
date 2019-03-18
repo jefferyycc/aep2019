@@ -27,7 +27,7 @@ public class ChanceTest {
     @Test
     public void probabilityOfTwoHeadsShouldBeOneQuarter() {
         var coinToss = new Chance(0.5);
-        assertEquals(new Chance(0.5), coinToss.and(coinToss));
+        assertEquals(new Chance(0.25), coinToss.and(coinToss));
     }
 
     @Test
