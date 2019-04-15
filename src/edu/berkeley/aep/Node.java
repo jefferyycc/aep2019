@@ -10,7 +10,7 @@ public class Node {
     private Collection<Edge> children = new ArrayList<>();
 
     public boolean canReach(Node destination) {
-        return countTo(destination, new HashSet<>()) > -1;
+        return costTo(destination, new HashSet<>(), Edge.HOP_STRATEGY) > -1;
     }
 
     public void add(Edge child) {
@@ -18,32 +18,19 @@ public class Node {
     }
 
     public int countTo(Node destination) {
-        return countTo(destination, new HashSet<>());
-    }
-
-    int countTo(Node destination, Collection<Node> visited) {
-        if (!visited.add(this)) return -1;
-        if (destination.equals(this)) return 0;
-        var minCount = -1;
-        for (Edge child : children) {
-            var count = child.countTo(destination, new HashSet(visited));
-            if (count >= 0 && (count < minCount || minCount == -1)) {
-                minCount = count + 1;
-            }
-        }
-        return minCount;
+        return costTo(destination, new HashSet<>(), Edge.HOP_STRATEGY);
     }
 
     public int costTo(Node destination) {
-        return costTo(destination, new HashSet<>());
+        return costTo(destination, new HashSet<>(), Edge.COST_STRATEGY);
     }
 
-    int costTo(Node destination, Collection<Node> visited) {
+    int costTo(Node destination, Collection<Node> visited, HopStrategy strategy) {
         if (!visited.add(this)) return -1;
         if (destination.equals(this)) return 0;
         var minCost = -1;
         for (Edge child : children) {
-            var cost = child.costTo(destination, new HashSet(visited));
+            var cost = child.costTo(destination, new HashSet(visited), strategy);
             if (cost >= 0 && (cost < minCost || minCost == -1)) {
                 minCost = cost;
             }
