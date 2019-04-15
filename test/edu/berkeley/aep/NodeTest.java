@@ -18,15 +18,15 @@ public class NodeTest {
     private static Node h = new Node();
 
     static {
-        h.add(b);
-        b.add(a);
-        a.add(f);
-        b.add(c);
-        c.add(d);
-        d.add(e);
-        c.add(e);
-        c.add(e);
-        e.add(b);
+        h.add(new Edge(b, 20));
+        b.add(new Edge(a, 12));
+        a.add(new Edge(f, 8));
+        b.add(new Edge(c, 10));
+        c.add(new Edge(d, 6));
+        d.add(new Edge(e, 8));
+        c.add(new Edge(e, 16));
+        c.add(new Edge(e, 22));
+        e.add(new Edge(b, 9));
     }
 
     @Test
@@ -39,7 +39,7 @@ public class NodeTest {
     public void nodeShouldReachChild() {
         Node parent = new Node();
         Node child = new Node();
-        parent.add(child);
+        parent.add(new Edge(child, 0));
         assertTrue(parent.canReach(child));
     }
 
