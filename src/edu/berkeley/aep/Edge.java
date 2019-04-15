@@ -2,6 +2,7 @@ package edu.berkeley.aep;
 
 import java.util.HashSet;
 
+// Understands how to calculate the distance between two nodes
 public class Edge {
     private final Node child;
     private final int cost;

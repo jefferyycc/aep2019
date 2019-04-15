@@ -3,8 +3,8 @@ package edu.berkeley.aep;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Optional;
 
+// Understands how to traverse a graph
 public class Node {
 
     private Collection<Edge> children = new ArrayList<>();
