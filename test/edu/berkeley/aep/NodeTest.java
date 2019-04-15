@@ -3,6 +3,7 @@ package edu.berkeley.aep;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
 public class NodeTest {
@@ -52,5 +53,20 @@ public class NodeTest {
     @Test
     public void shouldNotBlowStackIfCyclesExist() {
         assertFalse(h.canReach(g));
+    }
+
+    @Test
+    public void hopCountFromOneNodeToItselfIsZero() {
+        assertEquals(0, h.countTo(h));
+    }
+
+    @Test
+    public void hopCountFromHtoDIsThree() {
+        assertEquals(2, h.countTo(c));
+    }
+
+    @Test
+    public void hopCountFromBtoEIsTwo() {
+        assertEquals(2, b.countTo(e));
     }
 }
