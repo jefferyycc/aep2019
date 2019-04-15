@@ -14,4 +14,10 @@ public class Edge {
     public int countTo(Node destination, HashSet<Node> visited) {
         return child.countTo(destination, visited);
     }
+
+    public int costTo(Node destination, HashSet<Node> visited) {
+        int cost = child.costTo(destination, visited);
+        if (cost == -1) return -1;
+        return cost + this.cost;
+    }
 }

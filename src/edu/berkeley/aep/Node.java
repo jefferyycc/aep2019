@@ -33,4 +33,21 @@ public class Node {
         }
         return minCount;
     }
+
+    public int costTo(Node destination) {
+        return costTo(destination, new HashSet<>());
+    }
+
+    int costTo(Node destination, Collection<Node> visited) {
+        if (!visited.add(this)) return -1;
+        if (destination.equals(this)) return 0;
+        var minCost = -1;
+        for (Edge child : children) {
+            var cost = child.costTo(destination, new HashSet(visited));
+            if (cost >= 0 && (cost < minCost || minCost == -1)) {
+                minCost = cost;
+            }
+        }
+        return minCost;
+    }
 }

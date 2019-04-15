@@ -69,4 +69,9 @@ public class NodeTest {
     public void hopCountFromBtoEIsTwo() {
         assertEquals(2, b.countTo(e));
     }
+
+    @Test
+    public void costFromBtoEIs24() {
+        assertEquals(24, b.costTo(e));
+    }
 }
