@@ -10,7 +10,7 @@ public class Node {
     private Collection<Edge> children = new ArrayList<>();
 
     public boolean canReach(Node destination) {
-        return costTo(destination, new HashSet<>(), Edge.HOP_STRATEGY) > -1;
+        return countTo(destination) > -1;
     }
 
     public void add(Edge child) {
@@ -18,23 +18,29 @@ public class Node {
     }
 
     public int countTo(Node destination) {
-        return costTo(destination, new HashSet<>(), Edge.HOP_STRATEGY);
+        Path path = pathTo(destination, new HashSet<>(), Edge.HOP_STRATEGY);
+        if (path == Path.UNREACHABLE) {
+            return -1;
+        }
+        return path.distance();
     }
 
-    public int costTo(Node destination) {
-        return costTo(destination, new HashSet<>(), Edge.COST_STRATEGY);
+    public Path pathTo(Node destination, HopStrategy strategy) {
+        return pathTo(destination, new HashSet<>(), strategy);
     }
 
-    int costTo(Node destination, Collection<Node> visited, HopStrategy strategy) {
-        if (!visited.add(this)) return -1;
-        if (destination.equals(this)) return 0;
-        var minCost = -1;
+    Path pathTo(Node destination, Collection<Node> visited, HopStrategy strategy) {
+        if (destination.equals(this)) return new Path();
+        if (visited.contains(this)) return Path.UNREACHABLE;
+        visited.add(this);
+        Path champion = Path.UNREACHABLE;
         for (Edge child : children) {
-            var cost = child.costTo(destination, new HashSet(visited), strategy);
-            if (cost >= 0 && (cost < minCost || minCost == -1)) {
-                minCost = cost;
+            Path challenger = child.pathTo(destination, new HashSet<>(visited), strategy);
+            if (challenger.compareTo(champion) < 0) {
+                champion = challenger;
             }
         }
-        return minCost;
+        return champion;
     }
+
 }

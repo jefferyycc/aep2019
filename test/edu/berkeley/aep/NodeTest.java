@@ -71,7 +71,22 @@ public class NodeTest {
     }
 
     @Test
+    public void costFromBtoBIs0() {
+        assertEquals(0, b.pathTo(b, Edge.COST_STRATEGY).distance());
+    }
+
+    @Test
     public void costFromBtoEIs24() {
-        assertEquals(24, b.costTo(e));
+        assertEquals(24, b.pathTo(e, Edge.COST_STRATEGY).distance());
+    }
+
+    @Test
+    public void hopsFromBtoEIs2() {
+        assertEquals(2, b.pathTo(e, Edge.HOP_STRATEGY).distance());
+    }
+
+    @Test
+    public void costFromBtoFIs20() {
+        assertEquals(20, b.pathTo(f, Edge.COST_STRATEGY).distance());
     }
 }

@@ -14,9 +14,9 @@ public class Edge {
         this.cost = cost;
     }
 
-    public int costTo(Node destination, HashSet<Node> visited, HopStrategy strategy) {
-        int cost = child.costTo(destination, visited, strategy);
-        if (cost == -1) return -1;
-        return cost + strategy.cost(this);
+    public Path pathTo(Node destination, HashSet<Node> visited, HopStrategy strategy) {
+        Path path = child.pathTo(destination, visited, strategy);
+        if (path == Path.UNREACHABLE) return Path.UNREACHABLE;
+        return path.add(strategy.cost(this));
     }
 }
